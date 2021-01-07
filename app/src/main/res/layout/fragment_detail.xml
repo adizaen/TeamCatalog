@@ -13,13 +13,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="330dp"
             android:orientation="vertical"
             android:background="@color/teal_700" >
 
             <ImageView
                 android:id="@+id/iv_team"
                 android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center" />
 
@@ -42,6 +43,16 @@
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_favorite"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:textSize="10dp"
+                android:text="Add to Favorite" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,9 +61,19 @@
             android:layout_margin="10dp" >
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:textSize="14dp" />
+
+            <TextView
                 android:id="@+id/tv_full_detail_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="Deskripsi team" />
 
         </LinearLayout>

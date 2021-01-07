@@ -1,5 +1,6 @@
 package com.example.katalog.fragment;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.katalog.R;
 
 public class DetailFragment extends Fragment {
@@ -32,6 +35,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ivTeam = view.findViewById(R.id.iv_team);
         tvDetailName = view.findViewById(R.id.tv_detail_name);
         tvDetailYear = view.findViewById(R.id.tv_detail_year);
         tvDetailDescription = view.findViewById(R.id.tv_full_detail_description);
@@ -44,10 +48,14 @@ public class DetailFragment extends Fragment {
         Bundle bundle = getArguments();
 
         if (bundle != null){
+            String url = bundle.getString(IMAGE);
             String name = bundle.getString(NAME);
             String year = bundle.getString(YEAR);
             String description = bundle.getString(DESCRIPTION);
 
+            Glide.with(this)
+                    .load(url)
+                    .into(ivTeam);
             tvDetailName.setText(name);
             tvDetailYear.setText(year);
             tvDetailDescription.setText(description);

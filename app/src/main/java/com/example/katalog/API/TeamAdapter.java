@@ -60,6 +60,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             bundle.putString(DetailFragment.NAME, teamData.getStrTeam());
             bundle.putString(DetailFragment.YEAR, teamData.getIntFormedYear());
             bundle.putString(DetailFragment.DESCRIPTION, teamData.getStrDescriptionEN());
+            bundle.putString(DetailFragment.IMAGE, teamData.getStrTeamBadge());
             detailFragment.setArguments(bundle);
 
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
