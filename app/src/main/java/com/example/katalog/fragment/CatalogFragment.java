@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CatalogFragment extends Fragment implements View.OnClickListener {
+public class CatalogFragment extends Fragment {
 
     ProgressBar progressBar;
     RecyclerView recyclerView;
@@ -81,11 +83,7 @@ public class CatalogFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = getArguments();
 
         if (bundle != null) {
+            getTeam();
         }
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 }

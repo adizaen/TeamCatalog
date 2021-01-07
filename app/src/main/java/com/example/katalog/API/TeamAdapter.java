@@ -1,6 +1,9 @@
 package com.example.katalog.API;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.katalog.R;
+import com.example.katalog.fragment.DetailFragment;
 
 import java.util.List;
 
@@ -42,6 +50,21 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
         Glide.with(context)
                 .load(teamData.getStrTeamBadge())
                 .into(holder.teamImage);
+
+        holder.cvTeam.setOnClickListener(v -> {
+            Log.d("DATA NAME", teamData.getStrTeam());
+            Log.d("DATA YEAR", teamData.getIntFormedYear());
+            DetailFragment detailFragment = new DetailFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putString(DetailFragment.NAME, teamData.getStrTeam());
+            bundle.putString(DetailFragment.YEAR, teamData.getIntFormedYear());
+            bundle.putString(DetailFragment.DESCRIPTION, teamData.getStrDescriptionEN());
+            detailFragment.setArguments(bundle);
+
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, detailFragment).addToBackStack(null).commit();
+        });
     }
 
     @Override
@@ -52,6 +75,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     public class TeamViewHolder extends RecyclerView.ViewHolder {
         TextView teamName, teamInformedYear, teamDescription;
         ImageView teamImage;
+        CardView cvTeam;
 
         public TeamViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +84,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             teamInformedYear = itemView.findViewById(R.id.tv_informedyear);
             teamDescription = itemView.findViewById(R.id.tv_description);
             teamImage = itemView.findViewById(R.id.image_team);
+            cvTeam = itemView.findViewById(R.id.cv_team);
         }
     }
 }
