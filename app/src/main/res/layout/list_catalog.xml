@@ -38,12 +38,15 @@
                     android:layout_marginRight="10sp"
                     android:text="Hello"
                     android:textSize="16sp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_informedyear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold"
                     android:text="World" />
 
                 <TextView
