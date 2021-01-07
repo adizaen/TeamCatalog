@@ -13,16 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.katalog.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
-    private List<Team> listOfTeam;
+    private List<TeamData> listOfTeamData;
     private Context context;
 
-    public TeamAdapter(List<Team> listOfTeam, Context context){
-        this.listOfTeam = listOfTeam;
+    public TeamAdapter(List<TeamData> listOfTeamData, Context context){
+        this.listOfTeamData = listOfTeamData;
         this.context = context;
     }
 
@@ -35,19 +33,20 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
-        Team team = listOfTeam.get(position);
+        TeamData teamData = listOfTeamData.get(position);
 
-        holder.teamName.setText(team.getTeam());
-        holder.teamInformedYear.setText(team.getFormedyear());
+        holder.teamName.setText(teamData.getStrTeam());
+        holder.teamInformedYear.setText(teamData.getIntFormedYear());
+        holder.teamDescription.setText(teamData.getStrDescriptionEN());
 
         Glide.with(context)
-                .load(team.getTeambadge())
+                .load(teamData.getStrTeamBadge())
                 .into(holder.teamImage);
     }
 
     @Override
     public int getItemCount() {
-        return listOfTeam.size();
+        return listOfTeamData.size();
     }
 
     public class TeamViewHolder extends RecyclerView.ViewHolder {
@@ -59,7 +58,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
             teamName = itemView.findViewById(R.id.tv_name);
             teamInformedYear = itemView.findViewById(R.id.tv_informedyear);
-            // teamDescription = itemView.findViewById(R.id.tvde);
+            teamDescription = itemView.findViewById(R.id.tv_description);
             teamImage = itemView.findViewById(R.id.image_team);
         }
     }

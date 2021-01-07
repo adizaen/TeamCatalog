@@ -6,8 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface MyAPI {
-    public static String BASE_URL = "https://www.thesportsdb.com/api/v1/json/1/";
+    public static String BASE_URL = "https://www.thesportsdb.com";
 
-    @GET("lookup_all_teams.php?id=4331")
-    Call<List<Team>> getTeam();
+    @GET("/api/v1/json/1/lookup_all_teams.php?id=4331")
+    Call<Teams> getTeams();
 }

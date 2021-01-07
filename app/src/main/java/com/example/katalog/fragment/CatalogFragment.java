@@ -1,10 +1,10 @@
 package com.example.katalog.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.katalog.API.RetrofitClient;
-import com.example.katalog.API.Team;
+import com.example.katalog.API.TeamData;
 import com.example.katalog.API.TeamAdapter;
-import com.example.katalog.MainActivity;
+import com.example.katalog.API.Teams;
 import com.example.katalog.R;
 
 import java.util.List;
@@ -42,23 +42,23 @@ public class CatalogFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(view.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
         getTeam();
     }
 
     private void getTeam() {
-        Call<List<Team>> call = RetrofitClient.getInstance().getMyAPI().getTeam();
-        call.enqueue(new Callback<List<Team>>() {
+        Call<Teams> call = RetrofitClient.getInstance().getMyAPI().getTeams();
+        call.enqueue(new Callback<Teams>() {
             @Override
-            public void onResponse(Call<List<Team>> call, Response<List<Team>> response) {
+            public void onResponse(Call<Teams> call, Response<Teams> response) {
                 if (response.isSuccessful()){
-                    List<Team> listOfTeam = response.body();
-                    TeamAdapter adapter = new TeamAdapter(listOfTeam, getActivity());
+                    Teams teams = response.body();
+                    TeamAdapter adapter = new TeamAdapter(teams.getTeams(), getActivity().getApplicationContext());
 
                     recyclerView.setAdapter(adapter);
                 }
@@ -67,8 +67,8 @@ public class CatalogFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<List<Team>> call, Throwable t) {
-                Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Teams> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -81,7 +81,6 @@ public class CatalogFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = getArguments();
 
         if (bundle != null) {
-            getTeam();
         }
     }
 
