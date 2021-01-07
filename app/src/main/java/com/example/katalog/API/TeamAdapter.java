@@ -52,8 +52,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
                 .into(holder.teamImage);
 
         holder.cvTeam.setOnClickListener(v -> {
-            Log.d("DATA NAME", teamData.getStrTeam());
-            Log.d("DATA YEAR", teamData.getIntFormedYear());
             DetailFragment detailFragment = new DetailFragment();
 
             Bundle bundle = new Bundle();

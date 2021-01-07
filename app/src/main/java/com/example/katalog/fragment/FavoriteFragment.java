@@ -8,13 +8,45 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.katalog.R;
+import com.example.katalog.adapter.DbTeamAdapter;
+import com.example.katalog.db.DbHelper;
+import com.example.katalog.model.Team;
+
+import java.util.ArrayList;
 
 public class FavoriteFragment extends Fragment {
+
+    private RecyclerView recyclerView;
+    private DbTeamAdapter teamAdapter;
+    private ArrayList<Team> teamArrayList;
+    private DbHelper dbHelper;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvTeam);
+        teamAdapter = new DbTeamAdapter(getActivity());
+
+        dbHelper = new DbHelper(getActivity().getApplicationContext());
+        teamArrayList = dbHelper.getAllTeams();
+        teamAdapter.setListTeam(teamArrayList);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(teamAdapter);
+
+        return view;
+    }
+
+    public void OnResume() {
+        super.onResume();
+        teamArrayList = dbHelper.getAllTeams();
+        teamAdapter.setListTeam(teamArrayList);
+        teamAdapter.notifyDataSetChanged();
     }
 }
