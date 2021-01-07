@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,9 +37,13 @@ public class FavoriteFragment extends Fragment {
         teamArrayList = dbHelper.getAllTeams();
         teamAdapter.setListTeam(teamArrayList);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(teamAdapter);
+        if (teamAdapter.getItemCount() != 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(teamAdapter);
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "No favorite team", Toast.LENGTH_LONG).show();
+        }
 
         return view;
     }

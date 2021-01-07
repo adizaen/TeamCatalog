@@ -70,13 +70,13 @@ public class DbTeamAdapter extends RecyclerView.Adapter<DbTeamAdapter.DbTeamView
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
             builder.setTitle("Confirmation");
-            builder.setMessage("Remove from your list?");
+            builder.setMessage("Are you sure to remove " + listTeam.get(position).getStrTeam() + " team from your favorite list?");
 
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dbHelper.deleteTeam(listTeam.get(position).getIdTeam());
-                    Toast.makeText(context, "Team removed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,  listTeam.get(position).getStrTeam() + " team removed", Toast.LENGTH_SHORT).show();
 
                     FavoriteFragment favoriteFragment = new FavoriteFragment();
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
